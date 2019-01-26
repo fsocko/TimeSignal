@@ -12,10 +12,11 @@
   soundManager.setup({
     url: '',
     onready: function() {
-      fps_audio = soundManager.createSound({
-        id: 'aSound',
+      pips_audio = soundManager.createSound({
+        id: 'pips_id',
         url: 'bbc_pips.mp3'
       });
+      fps_audio.mute();
       // fps_audio.mute();
     },
     ontimeout: function() {

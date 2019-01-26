@@ -1,7 +1,7 @@
-var fps_audio = null;
+var pips_audio = null;
+var lastPipSecond = null;
 
 function updateTime() {
-  var lastPipSecond = null;
   var today = new Date();
   var h = today.getHours();
   var m = today.getMinutes();
@@ -10,7 +10,7 @@ function updateTime() {
   if (m < 10) {m = "0" + m};
   if (s < 10) {s = "0" + s};
   document.getElementById('time').innerHTML =h + ":" + m + ":" + s;  
-  setTimeout(updateTime, 1000);
+  setTimeout(updateTime, 600);
 
   if(evaluatePip(s, lastPipSecond)){
     lastPipSecond = s;
@@ -24,27 +24,27 @@ function toggleMute() {
         
         if (button.innerHTML === "SOUND OFF") {
           button.innerHTML = "SOUND ON";
-          fps_audio.unmute();
+          pips_audio.unmute();
           // console.log("time signal - unmuted");
         } 
         else {
           button.innerHTML = "SOUND OFF";
-          fps_audio.mute();
+          pips_audio.mute();
           // console.log("time signal - unmuted");
         }
         return 0;
 }
 
-function evaluatePip(s, lastPip) {
+function evaluatePip(s) {
   var interval = document.getElementById("pipIntervalInput").value;
-  if((s % interval-5 == 0) && (s > lastPip+5 || lastPip == null)){
+  if((s % interval-5 == 0) && (s > lastPipSecond+5 || lastPipSecond == null)){
     return true;
   }
   else{return false;}
 }
 
 function playPips() {
-  fps_audio.play();
+  pips_audio.play();
   console.log("time signal - Pips now.");
   return 0;
 }
