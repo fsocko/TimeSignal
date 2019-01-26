@@ -10,7 +10,7 @@ function updateTime() {
   if (m < 10) {m = "0" + m};
   if (s < 10) {s = "0" + s};
   document.getElementById('time').innerHTML =h + ":" + m + ":" + s;  
-  setTimeout(updateTime, 600);
+  setTimeout(updateTime, 900);
 
   if(evaluatePip(s, lastPipSecond)){
     lastPipSecond = s;
