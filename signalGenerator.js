@@ -1,47 +1,51 @@
+var fps_audio = null;
+
+function updateTime() {
+  var lastPipSecond = null;
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  if (h < 10) {h = "0" + h};
+  if (m < 10) {m = "0" + m};
+  if (s < 10) {s = "0" + s};
+  document.getElementById('time').innerHTML =h + ":" + m + ":" + s;  
+  setTimeout(updateTime, 1000);
+
+  if(evaluatePip(s, lastPipSecond)){
+    lastPipSecond = s;
+    playPips();
+  }
+}
+
 function toggleMute() {
-        
         var audio = document.getElementById("pip_audio");
         var button = document.getElementById("muteToggle");
-
+        
         if (button.innerHTML === "SOUND OFF") {
           button.innerHTML = "SOUND ON";
-          audio.muted = false;
+          fps_audio.unmute();
+          // console.log("time signal - unmuted");
         } 
         else {
           button.innerHTML = "SOUND OFF";
-          audio.muted = true;
+          fps_audio.mute();
+          // console.log("time signal - unmuted");
         }
         return 0;
 }
 
-function evaluatePip(h, m, s) {
+function evaluatePip(s, lastPip) {
   var interval = document.getElementById("pipIntervalInput").value;
-  if(s % interval == 0){
+  if((s % interval-5 == 0) && (s > lastPip+5 || lastPip == null)){
     return true;
   }
   else{return false;}
 }
 
-function playPip() {
-  var audio = document.getElementById("pip_audio").value;
-  soundManager.play('mySound');
+function playPips() {
+  fps_audio.play();
+  console.log("time signal - Pips now.");
   return 0;
 }
 
-function loadSoundManager(){
-
-  soundManager.setup({
-    url: '',
-    onready: function() {
-      var mySound = soundManager.createSound({
-        id: 'aSound',
-        url: 'bbc_pips.mp3'
-      });
-      mySound.play();
-    },
-    ontimeout: function() {
-      // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
-    }
-  });
-
-}
