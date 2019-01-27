@@ -1,6 +1,13 @@
 var pips_audio = null;
 var lastPipSecond = null;
 
+function init(){
+
+toggleMute();
+updateTime();
+
+}
+
 function updateTime() {
   var today = new Date();
   var h = today.getHours();
@@ -22,22 +29,24 @@ function toggleMute() {
         var audio = document.getElementById("pip_audio");
         var button = document.getElementById("muteToggle");
         
-        if (button.innerHTML === "SOUND OFF") {
+        if (button.innerHTML === "SOUND OFF" && pips_audio.muted) {
           button.innerHTML = "SOUND ON";
           pips_audio.unmute();
-          // console.log("time signal - unmuted");
+          button.style.backgroundColor = "#009E2D"; 
+          console.log("time signal - unmuted");
         } 
         else {
           button.innerHTML = "SOUND OFF";
           pips_audio.mute();
-          // console.log("time signal - unmuted");
+          button.style.backgroundColor = "#9e0b00";
+          console.log("time signal - unmuted");
         }
         return 0;
 }
 
-function evaluatePip(s) {
+function evaluatePip(s, lastPipSecond) {
   var interval = document.getElementById("pipIntervalInput").value;
-  if((s % interval-5 == 0) && (s > lastPipSecond+5 || lastPipSecond == null)){
+  if(((s+5) % interval == 0) && (s > lastPipSecond+5 || lastPipSecond == null)){
     return true;
   }
   else{return false;}
