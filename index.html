@@ -65,10 +65,10 @@ Released   : 20140309
 					<div id="time"></div>
 					<li><button id="muteToggle" class="button" onClick='toggleMute()')>SOUND OFF</button></li>
 					<form class="form" action="">
-						<p>Last Pip every</p>
-						<li>Minutes:<input class="input" id="pipIntervalInput_m" type="number" min=0 step=1 value=0></li>
-							<li>Seconds:<input class="input" id="pipIntervalInput_s" type="number" min=0 step=1 value=60></li>					
-						<p>seconds</p>
+						<p>Last Pip On Every:</p>
+						<li>Minutes:<input class="input" id="pipIntervalInput_m" type="number" min=0 max=60 step=1 value=0></li>
+						<li>Seconds:<input class="input" id="pipIntervalInput_s" type="number" min=0 max=60 step=1 value=60></li>					
+						<p>of every hour.</p>
 					</form>
 				</ul>
 			</div>
