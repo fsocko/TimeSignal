@@ -1,6 +1,5 @@
 {
-	"scripts":
-	{
+	"scripts": {
 		"test": "jest"
 	}
 }
